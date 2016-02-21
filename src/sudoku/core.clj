@@ -27,6 +27,13 @@
   (when (singleton? s) (mapv #(if (not= s %) (set (remove s %)) %) row)))
 
 
+(def remove-singleton-box
+  "removes a given singleton from a 3x3 box of sets"
+  [s box]
+  ;TODO redundant?
+  (map remove-singleton-row box))
+
+
 (defn remove-singleton-col
   "removes a given singleton from the nth element in each row of data"
   [s col n]
