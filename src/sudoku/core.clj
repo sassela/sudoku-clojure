@@ -13,7 +13,7 @@
 (defn singleton?
   "determines whether the argument is a singleton"
   [s]
-  (and (number? s) (set? s) (= 1 (count s))))
+  (and (number? (first s)) (set? s) (= 1 (count s))))
 
 
 (defn -main [& args]
