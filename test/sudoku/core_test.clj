@@ -39,11 +39,11 @@
     (is (false? (singleton? #{3 5})))))
 
 (deftest remove-singleton-row-test
-  (testing "removes a given singleton from a row of sets"
+  (testing "function removes a given singleton from a row of sets"
     (let [row [#{7 1 4 6 3 2 9 5 8} #{5} #{9}]]
       (is (= [#{7 1 4 6 3 2 5 8} #{5} #{9}] (remove-singleton-row #{9} row))))))
 
 (deftest remove-singleton-col-test
-  (test "remove a given singleton from the nth elements in a collection of rows"
+  (testing "function removes a given singleton from the nth element in each row of data"
     (let [col [[#{7 1 4 6 3 2 9 5 8}][#{2}][#{5}]]]
-      (is (= [[#{7 1 4 6 3 9 5 8}][#{2}][#{5}]] (remove-singleton-col #{2} col))))))
+      (is (= [[#{7 1 4 6 3 9 5 8}][#{2}][#{5}]] (remove-singleton-col #{2} col 0))))))

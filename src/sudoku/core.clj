@@ -21,10 +21,16 @@
   (and (number? (first s)) (set? s) (= 1 (count s))))
 
 
-(defn remove-singleton
-  "removes a singleton from a line of sets"
-  [s line]
-  (when (singleton? s) (mapv #(if (not= s %) (set (remove s %)) %) line)))
+(defn remove-singleton-row
+  "removes a given singleton from a row of sets"
+  [s row]
+  (when (singleton? s) (mapv #(if (not= s %) (set (remove s %)) %) row)))
+
+
+(defn remove-singleton-col
+  "removes a given singleton from the nth element in each row of data"
+  [s col n]
+  (mapv #(if (not= s (nth % n)) [(set (remove s (nth % n)))] [(nth % n)]) col))
 
 
 (defn -main [& args]
