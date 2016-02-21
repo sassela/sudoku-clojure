@@ -57,3 +57,10 @@
                                      [#{7 1 4 6 3 2 5 8} #{7 1 4 6 3 2 5 8} #{7 1 4 6 3 2 5 8}]
                                      [#{7 1 4 6 3 2 5 8} #{7 1 4 6 3 2 5 8} #{7 1 4 6 3 2 5 8}]]]
       (is (= correctly-transformed-box (remove-singleton-box #{9} box))))))
+
+(deftest box-test
+  (testing "function returns a subgrid containing the singleton at the given coordinates"
+    (let [correct-box [[#{7 1 4 6 3 2 9 5 8} #{9} #{1}]
+                       [#{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8}]
+                       [#{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8}]]]
+      (is (= correct-box (box correctly-transformed-data 5 2))))))
