@@ -1,14 +1,19 @@
 (ns sudoku.core)
 
 
-(def possible-numbers #{1 2 3 4 5 6 7 8 9})
+(def possible-nums #{1 2 3 4 5 6 7 8 9})
 
 
-(defn transform-line
+(defn transform-row
   "transforms a vector of numbers into a vector of sets"
   [line]
-  (mapv (fn [n] (if (zero? n) possible-numbers #{n})) line))
+  (mapv (fn [n] (if (zero? n) possible-nums #{n})) line))
 
+
+(defn transform
+  [data]
+  ;TODO add validation schema?
+  (mapv transform-row data))
 
 (defn singleton?
   "determines whether the argument is a singleton"
