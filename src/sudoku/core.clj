@@ -16,5 +16,11 @@
   (and (number? (first s)) (set? s) (= 1 (count s))))
 
 
+(defn remove-singleton
+  "removes a singleton from a line of sets"
+  [s line]
+  (when (singleton? s) (mapv #(if (not= s %) (set (remove s %)) %) line)))
+
+
 (defn -main [& args]
   (println "Hello, World!"))

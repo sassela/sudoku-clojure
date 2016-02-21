@@ -16,6 +16,6 @@
     (is (false? (singleton? #{3 5})))))
 
 (deftest remove-singleton-test
-  (testing "function removes a singleton from a set of numbers"
+  (testing "removes a singleton from a line of sets"
     (let [line [#{7 1 4 6 3 2 9 5 8} #{5} #{9}]]
       (is (= [#{7 1 4 6 3 2 5 8} #{5} #{9}] (remove-singleton #{9} line))))))
