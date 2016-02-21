@@ -40,5 +40,10 @@
   (mapv #(if (not= s (nth % n)) [(set (remove s (nth % n)))] [(nth % n)]) col))
 
 
+(defn box
+  [data x y]
+  (map #(subvec % (quot x 3) (+ (quot x 3) 3)) (subvec data y (+ y 3))))
+
+
 (defn -main [& args]
   (println "Hello, World!"))

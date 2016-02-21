@@ -63,4 +63,4 @@
     (let [correct-box [[#{7 1 4 6 3 2 9 5 8} #{9} #{1}]
                        [#{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8}]
                        [#{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8}]]]
-      (is (= correct-box (box correctly-transformed-data 5 2))))))
+      (is (= correct-box (box correctly-transformed-data 2 6))))))
