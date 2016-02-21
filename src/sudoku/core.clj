@@ -10,5 +10,11 @@
   (mapv (fn [n] (if (zero? n) possible-numbers #{n})) line))
 
 
+(defn singleton?
+  "determines whether the argument is a singleton"
+  [s]
+  (and (number? s) (set? s) (= 1 (count s))))
+
+
 (defn -main [& args]
   (println "Hello, World!"))

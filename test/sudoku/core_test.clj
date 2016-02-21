@@ -10,7 +10,7 @@
 
 (deftest singleton?-test
   (testing "function determines whether the argument is a singleton"
-    (true? (singleton? #{3}))
-    (false? (singleton? [3]))
-    (false? (singleton? #{"3"}))
-    (false? (singleton? #{3 5}))))
+    (is (true? (singleton? #{3})))
+    (is (false? (singleton? [3])))
+    (is (false? (singleton? #{"3"})))
+    (is (false? (singleton? #{3 5})))))
