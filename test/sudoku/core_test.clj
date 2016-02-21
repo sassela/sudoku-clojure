@@ -48,7 +48,7 @@
     (let [col [[#{7 1 4 6 3 2 9 5 8}][#{2}][#{5}]]]
       (is (= [[#{7 1 4 6 3 9 5 8}][#{2}][#{5}]] (remove-singleton-col #{2} col 0))))))
 
-(deftest remove-singleton-box
+(deftest remove-singleton-box-test
   (testing "function removes a given singleton from a 3x3 box of sets"
     (let [box [[#{7 1 4 6 3 2 9 5 8} #{9} #{1}]
                [#{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8}]
@@ -56,4 +56,4 @@
           correctly-transformed-box [[#{7 1 4 6 3 2 5 8} #{9} #{1}]
                                      [#{7 1 4 6 3 2 5 8} #{7 1 4 6 3 2 5 8} #{7 1 4 6 3 2 5 8}]
                                      [#{7 1 4 6 3 2 5 8} #{7 1 4 6 3 2 5 8} #{7 1 4 6 3 2 5 8}]]]
-      (is (= correctly-transformed-box (remove-singleton-box box))))))
+      (is (= correctly-transformed-box (remove-singleton-box #{9} box))))))
