@@ -22,10 +22,10 @@
                                 [#{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7} #{8} #{1} #{7 1 4 6 3 2 9 5 8} #{3}]
                                 [#{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{6} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{5} #{9} #{7 1 4 6 3 2 9 5 8}]])
 
-(deftest transform-line-test
+(deftest transform-row-test
   (testing "function transforms a vector of numbers into a vector of sets"
-    (let [transformed-line [#{7 1 4 6 3 2 9 5 8} #{2} #{5}]]
-          (is (= transformed-line (transform-line [0 2 5]))))))
+    (let [transformed-row [#{7 1 4 6 3 2 9 5 8} #{2} #{5}]]
+          (is (= transformed-row (transform-row [0 2 5]))))))
 
 (deftest transform-test
   (testing "functions transforms a vector of vectors of numbers into a vector of vector of sets"
@@ -38,7 +38,12 @@
     (is (false? (singleton? #{"3"})))
     (is (false? (singleton? #{3 5})))))
 
-(deftest remove-singleton-test
-  (testing "removes a singleton from a line of sets"
-    (let [line [#{7 1 4 6 3 2 9 5 8} #{5} #{9}]]
-      (is (= [#{7 1 4 6 3 2 5 8} #{5} #{9}] (remove-singleton #{9} line))))))
+(deftest remove-singleton-row-test
+  (testing "removes a given singleton from a row of sets"
+    (let [row [#{7 1 4 6 3 2 9 5 8} #{5} #{9}]]
+      (is (= [#{7 1 4 6 3 2 5 8} #{5} #{9}] (remove-singleton-row #{9} row))))))
+
+(deftest remove-singleton-col-test
+  (test "remove a given singleton from the nth elements in a collection of rows"
+    (let [col [[#{7 1 4 6 3 2 9 5 8}][#{2}][#{5}]]]
+      (is (= [[#{7 1 4 6 3 9 5 8}][#{2}][#{5}]] (remove-singleton-col #{2} col))))))
