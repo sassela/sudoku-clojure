@@ -27,8 +27,8 @@
 
 (defn remove-singleton-row
   "removes a given singleton from a row of sets"
-  [row s]
-  (when (singleton? s) (mapv #(if (not= s %) (set (remove s %)) %) row)))
+  [data s y]
+  (update data y (fn [row] (mapv #(if (singleton? %) % (set (remove s %))) row))))
 
 
 (defn box
