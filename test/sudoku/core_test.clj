@@ -13,14 +13,15 @@
                     [0 0 0 0 7 8 1 0 3]
                     [0 0 0 6 0 0 5 9 0]])
 
-(def correctly-transformed-data [[#{7 1 4 6 3 2 9 5 8} #{2} #{5} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{1} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8}] [#{1} #{7 1 4 6 3 2 9 5 8} #{4} #{2} #{5} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8}]
-                                [#{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{6} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{4} #{2} #{1} #{7 1 4 6 3 2 9 5 8}]
-                                [#{7 1 4 6 3 2 9 5 8} #{5} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{3} #{2} #{7 1 4 6 3 2 9 5 8}]
-                                [#{6} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{2} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{9}]
-                                [#{7 1 4 6 3 2 9 5 8} #{8} #{7} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{6} #{7 1 4 6 3 2 9 5 8}]
-                                [#{7 1 4 6 3 2 9 5 8} #{9} #{1} #{5} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{6} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8}]
-                                [#{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7} #{8} #{1} #{7 1 4 6 3 2 9 5 8} #{3}]
-                                [#{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{6} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{5} #{9} #{7 1 4 6 3 2 9 5 8}]])
+(def transformed-data [[#{7 1 4 6 3 2 9 5 8} #{2} #{5} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{1} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8}]
+                       [#{1} #{7 1 4 6 3 2 9 5 8} #{4} #{2} #{5} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8}]
+                       [#{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{6} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{4} #{2} #{1} #{7 1 4 6 3 2 9 5 8}]
+                       [#{7 1 4 6 3 2 9 5 8} #{5} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{3} #{2} #{7 1 4 6 3 2 9 5 8}]
+                       [#{6} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{2} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{9}]
+                       [#{7 1 4 6 3 2 9 5 8} #{8} #{7} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{6} #{7 1 4 6 3 2 9 5 8}]
+                       [#{7 1 4 6 3 2 9 5 8} #{9} #{1} #{5} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{6} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8}]
+                       [#{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7} #{8} #{1} #{7 1 4 6 3 2 9 5 8} #{3}]
+                       [#{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{6} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{5} #{9} #{7 1 4 6 3 2 9 5 8}]])
 
 (deftest transform-row-test
   (testing "function transforms a vector of numbers into a vector of sets"
@@ -29,7 +30,7 @@
 
 (deftest transform-test
   (testing "functions transforms a vector of vectors of numbers into a vector of vector of sets"
-    (is (= correctly-transformed-data (transform starting-data)))))
+    (is (= transformed-data (transform starting-data)))))
 
 (deftest singleton?-test
   (testing "function determines whether the argument is a singleton"
@@ -45,8 +46,15 @@
 
 (deftest remove-singleton-col-test
   (testing "function removes a given singleton from the nth element in each row of data"
-    (let [col [[#{7 1 4 6 3 2 9 5 8}][#{2}][#{5}]]]
+    (let [col [[#{7 1 4 6 3 2 9 5 8}][#{2}][#{5 2}]]]
       (is (= [[#{7 1 4 6 3 9 5 8}][#{2}][#{5}]] (remove-singleton-col #{2} col 0))))))
+
+(deftest box-test
+  (testing "function returns a subgrid containing the singleton at the given coordinates"
+    (let [correct-box [[#{7 1 4 6 3 2 9 5 8} #{9} #{1}]
+                       [#{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8}]
+                       [#{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8}]]]
+      (is (= correct-box (box transformed-data 2 6))))))
 
 (deftest remove-singleton-box-test
   (testing "function removes a given singleton from a 3x3 box of sets"
@@ -58,9 +66,14 @@
                                      [#{7 1 4 6 3 2 5 8} #{7 1 4 6 3 2 5 8} #{7 1 4 6 3 2 5 8}]]]
       (is (= correctly-transformed-box (remove-singleton-box #{9} box))))))
 
-(deftest box-test
-  (testing "function returns a subgrid containing the singleton at the given coordinates"
-    (let [correct-box [[#{7 1 4 6 3 2 9 5 8} #{9} #{1}]
-                       [#{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8}]
-                       [#{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8}]]]
-      (is (= correct-box (box correctly-transformed-data 2 6))))))
+(deftest remove-singletons-test
+  (testing "function removes a given singleton from the same row, the same column, or the same 3x3 box (if present)"
+    (let [data transformed-data
+          correctly-transformed-data [[#{7 1 4 6 3 2 9 8} #{7 1 4 6 3 2 9 8} #{1} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8}]
+                                      [#{2} #{5} #{7 1 4 6 3 2 9 8} #{7 1 4 6 3 2 9 8} #{7 1 4 6 3 2 9 8} #{7 1 4 6 3 2 9 8}]
+                                      [#{7 1 4 6 3 2 9 8} #{7 1 4 6 3 2 9 8} #{4} #{2} #{1} #{7 1 4 6 3 2 9 5 8}]
+                                      [#{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 8} #{7 1 4 6 3 2 9 5 8} #{3} #{2} #{7 1 4 6 3 2 9 5 8}]
+                                      [#{7 1 4 6 3 2 9 5 8} #{2} #{7 1 4 6 3 2 9 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{9}]
+                                      [#{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 8} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8} #{6} #{7 1 4 6 3 2 9 5 8}]]]
+      (is (= correctly-transformed-data (remove-singletons data #{5} 1 1))))))
+
