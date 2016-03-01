@@ -42,12 +42,12 @@
 (deftest remove-singleton-row-test
   (testing "function removes a given singleton from a row of sets"
     (let [row [#{7 1 4 6 3 2 9 5 8} #{5} #{9}]]
-      (is (= [#{7 1 4 6 3 2 5 8} #{5} #{9}] (remove-singleton-row #{9} row))))))
+      (is (= [#{7 1 4 6 3 2 5 8} #{5} #{9}] (remove-singleton-row row #{9}))))))
 
 (deftest remove-singleton-col-test
   (testing "function removes a given singleton from the nth element in each row of data"
     (let [col [[#{7 1 4 6 3 2 9 5 8}][#{2}][#{5 2}]]]
-      (is (= [[#{7 1 4 6 3 9 5 8}][#{2}][#{5}]] (remove-singleton-col #{2} col 0))))))
+      (is (= [[#{7 1 4 6 3 9 5 8}][#{2}][#{5}]] (remove-singleton-col col #{2} 0))))))
 
 (deftest box-test
   (testing "function returns a subgrid containing the singleton at the given coordinates"
@@ -64,7 +64,7 @@
           correctly-transformed-box [[#{7 1 4 6 3 2 5 8} #{9} #{1}]
                                      [#{7 1 4 6 3 2 5 8} #{7 1 4 6 3 2 5 8} #{7 1 4 6 3 2 5 8}]
                                      [#{7 1 4 6 3 2 5 8} #{7 1 4 6 3 2 5 8} #{7 1 4 6 3 2 5 8}]]]
-      (is (= correctly-transformed-box (remove-singleton-box #{9} box))))))
+      (is (= correctly-transformed-box (remove-singleton-box box #{9}))))))
 
 (deftest remove-singletons-test
   (testing "function removes a given singleton from the same row, the same column, or the same 3x3 box (if present)"
