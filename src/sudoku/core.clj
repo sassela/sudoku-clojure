@@ -37,6 +37,29 @@
   (map #(subvec % (quot x 3) (+ (quot x 3) 3)) (subvec data y (+ y 3))))
 
 
+(defn blah
+  [data x y]
+;  (pprint (map #(assoc data % 0) (range (quot y 3) (+ (quot y 3) 3)))) ;col
+  ;update x-x plus 3 in row. reduce?
+;  (fn [row x] (map #(assoc row % 0) (range (quot x 3) (+ (quot x 3) 3))))
+
+  (pprint (map (fn [row] (map #(assoc row % 0) (range (quot x 3) (+ (quot x 3) 3)))) (range (quot y 3) (+ (quot y 3) 3))))
+;    (+ (quot y 3) 3)
+;  (subvec data y (+ y 3))
+;  (update (subvec data y (+ y 3)) x 0)
+  )
+
+(defn haveago [data x y]
+  ;TODO use core.matrix? irange? https://cloojure.github.io/doc/core.matrix/clojure.core.matrix.select.html
+  (let [y-start (* (quot y 3) 3)
+        x-start (* (quot x 3) 3)]
+    ;replaces box in row with 0s
+    (loop [r y-start]
+      (when (< r (+ y-start 3))
+        (-> (nth data r) (assoc x-start 0) (assoc (+ x-start 1) 0) (assoc (+ x-start 2) 0) println))
+      (recur (inc r)))
+    ))
+
 (defn remove-singleton-box
   "removes a given singleton from a 3x3 box of sets"
   [box s]
