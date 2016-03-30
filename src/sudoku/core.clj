@@ -1,4 +1,6 @@
-(ns sudoku.core)
+(ns sudoku.core
+  (require [clojure.pprint :refer [pprint]])
+  (:gen-class))
 
 
 (defn transform-row
