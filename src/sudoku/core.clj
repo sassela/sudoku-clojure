@@ -53,13 +53,13 @@
       (if (>= row (+ y-start box-size)) d (recur (inc row) (update d row remove-singleton-box-row))))))
 
 
-(defn remove-all-singletons
+(defn remove-singletons
   "for every other set in the same row, the same column, or the same 3x3 box, removes that number (if present)."
   [data s x y]
   (-> data
-    (remove-singleton-row data s y)
-    (remove-singleton-col data s x)
-    (remove-singleton-box data s x y)))
+    (remove-singleton-row s y)
+    (remove-singleton-col s x)
+    (remove-singleton-box s x y)))
 
 
 (defn solve
