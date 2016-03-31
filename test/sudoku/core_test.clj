@@ -81,3 +81,8 @@
                                       [#{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 9 5 8} #{7 1 4 6 3 2 9 5 8}                 #{6} #{7 1 4 6 3 2 9 5 8} #{7 1 4 6 3 2 9 5 8}                 #{5}                 #{9} #{7 1 4 6 3 2 9 5 8}]]]
       (is (= correctly-transformed-data (remove-singletons data #{2} 1 0))))))
 
+(deftest all-coords-test
+  (testing "function returns all coordinates of the data"
+    (let [data transformed-data]
+      (is (= (* (count data) (count data)) (count (all-coords data)))))))
+
