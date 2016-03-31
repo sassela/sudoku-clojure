@@ -62,6 +62,14 @@
     (remove-singleton-box s x y)))
 
 
+(defn coordinates
+  "returns all coordinates of the data"
+  [data]
+  (let [n-cols (range (count data))
+        n-rows (range (count (first data)))]
+    (into (sorted-set) (for [x n-cols y n-rows] (vector x y)))))
+
+
 (defn solve
   [data]
   (-> data
