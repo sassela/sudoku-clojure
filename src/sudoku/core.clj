@@ -73,6 +73,7 @@
         n-rows (range (count (first data)))]
     (into (sorted-set) (for [x n-cols y n-rows] (vector x y)))))
 
+
 (defn set-at
   [data x y]
   (-> data (nth y) (nth x)))
@@ -80,8 +81,7 @@
 (defn every-set-is-singleton?
   [data]
   (every? true? (map
-                  #(let [x (first %)
-                         y (second %)]
+                  #(let [[x y] %]
                      (singleton? (set-at data x y)))
                   (coordinates data))))
 
@@ -92,12 +92,11 @@
     (if (or (nil? c) (empty? c))
       d
       (recur
-        (let [xy (first c)
-              x (first xy)
-              y (second xy)
+        (let [[x y] (first c)
               s (set-at data x y)]
           (if (singleton? s) (remove-singletons d s x y) d))
         (rest c)))))
+
 
 (defn unique-singleton
   [s other-sets]
