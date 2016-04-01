@@ -101,3 +101,10 @@
                                   [    #{4 2 5}   #{4 6}     #{2}       #{4 9}         #{7}       #{8}       #{1}       #{4}       #{3}]
                                   [#{7 4 3 2 8} #{7 4 3} #{3 2 8}         #{6}     #{1 4 3}     #{3 2}       #{5}       #{9} #{7 4 2 8}]]]
       (is (= all-singletons-removed (remove-all-singletons data))))))
+
+
+(deftest adjacent-sets-test
+  (testing "function gets set of items in the same row, column and box as the set at the given coordinate"
+    (let [data transformed-data]
+      (is (= #{#{6} #{7} #{2} #{8} #{7 1 4 6 3 2 9 5 8} #{1} #{5} #{4}}
+            (adjacent-sets data 5 5))))))

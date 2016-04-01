@@ -1,7 +1,6 @@
 (ns sudoku.core
   (require [clojure.pprint :refer [pprint]]
-    [clojure.set :refer [difference]]
-    [clojure.core.matrix :refer [pm]])
+    [clojure.set :refer [difference]])
   (:gen-class))
 
 
@@ -14,14 +13,12 @@
 
 (defn transform
   [data]
-  ;TODO add validation schema?
   (mapv transform-row data))
 
 
 (defn singleton?
   "determines whether the argument is a singleton"
   [s]
-  ; TODO plumatic schema / regex?
   (and (number? (first s)) (set? s) (= 1 (count s))))
 
 
@@ -43,7 +40,6 @@
 
 
 (defn remove-singleton-box [data s x y]
-  ;TODO use core.matrix? irange? https://cloojure.github.io/doc/core.matrix/clojure.core.matrix.select.html
   (let [box-size 3
         box-start #(* (quot % box-size) box-size)
         x-start (box-start x)
@@ -51,8 +47,7 @@
         remove-singleton-box-row (fn [r] (loop [i x-start row r]
                                            (if (>= i (+ x-start box-size))
                                              row
-                                             (recur (inc i) (update row i (fn [d] (remove-singleton d s))))))) ;TODO move
-        ]
+                                             (recur (inc i) (update row i (fn [d] (remove-singleton d s)))))))]
     (loop [row y-start d data]
       (if (>= row (+ y-start box-size)) d (recur (inc row) (update d row remove-singleton-box-row))))))
 
@@ -78,12 +73,14 @@
   [data x y]
   (-> data (nth y) (nth x)))
 
+
 (defn every-set-is-singleton?
   [data]
   (every? true? (map
                   #(let [[x y] %]
                      (singleton? (set-at data x y)))
                   (coordinates data))))
+
 
 (defn remove-all-singletons
   "removes singletons for every singleton in the data"
@@ -105,7 +102,7 @@
 
 
 (defn adjacent-sets
-  "Get set of items in the same row, column and box as the set at the given coordinate"
+  "gets set of items in the same row, column and box as the set at the given coordinate"
   [data x y]
   (let [s (set-at data x y)
         row (fn [y] (nth data y))
@@ -132,8 +129,7 @@
                  (-> d
                    (assoc-in [y x] singleton)
                    (remove-singletons singleton x y))
-                 d)
-               )
+                 d))
         (rest c)))))
 
 
@@ -142,16 +138,20 @@
   (let [transformed-data (transform data)]
     (loop [sudoku-grid transformed-data]
       (if (every-set-is-singleton? sudoku-grid)
-        sudoku-grid
-        (recur (do
-                 (print
-                   (-> sudoku-grid
-                   reduce-unique-singletons
-                   remove-all-singletons))
-                 (-> sudoku-grid
-                   reduce-unique-singletons
-                   remove-all-singletons)))))))
+        (print sudoku-grid)
+        (recur (-> sudoku-grid
+                 reduce-unique-singletons
+                 remove-all-singletons))))))
 
 
 (defn -main [& args]
-  (println "Hello, World!"))
+  (let [starting-data [[0 2 5 0 0 1 0 0 0]
+                       [1 0 4 2 5 0 0 0 0]
+                       [0 0 6 0 0 4 2 1 0]
+                       [0 5 0 0 0 0 3 2 0]
+                       [6 0 0 0 2 0 0 0 9]
+                       [0 8 7 0 0 0 0 6 0]
+                       [0 9 1 5 0 0 6 0 0]
+                       [0 0 0 0 7 8 1 0 3]
+                       [0 0 0 6 0 0 5 9 0]]]
+    (solve starting-data)))
