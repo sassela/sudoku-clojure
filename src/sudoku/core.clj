@@ -105,9 +105,9 @@
 
 (defn reduce-unique-singletons
   [data]
-  (let [row #(nth data %)
-        col #(map (fn [row] (nth row %)) data)
-        box (fn [x y] (flatten (map #(subvec % (quot x 3) (+ (quot x 3) 3)) (subvec data y (+ y 3)))))]
+  (let [row (fn [d y] (nth d y))
+        col (fn [d x] #(map (nth % x) d))
+        box (fn [d x y] (flatten (map #(subvec % (quot x 3) (+ (quot x 3) 3)) (subvec d y (+ y 3)))))]
     (loop [d data c (coordinates data)]
       (if (or (nil? c) (empty? c))
         d
