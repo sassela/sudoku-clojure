@@ -24,8 +24,8 @@
 
 
 (defn remove-singleton
-  [d s]
-  (if (singleton? d) d (set (remove s d))))
+  [data s]
+  (if (singleton? data) data (set (remove s data))))
 
 
 (defn remove-singleton-row
@@ -73,10 +73,14 @@
   [data x y]
   (-> data (nth y) (nth x)))
 
-(defn solve
+(defn every-set-is-singleton?
   [data]
-  (-> data
-    transform)
+  (every? true? (map
+                  #(let [x (first %)
+                         y (second %)]
+                     (singleton? (set-at data x y)))
+                  (coordinates data))))
+
 (defn remove-all-singletons
   "removes singletons for every singleton in the data"
   [data]
@@ -92,7 +96,16 @@
         (rest c)))))
 
 
-  )
+(defn solve
+  [data]
+  (let [transformed-data (transform data)]
+    (loop [d transformed-data]
+      (if (every-set-is-singleton? d)
+        d
+        (recur (do
+                 (print d)
+                 (remove-all-singletons d)))))
+    ))
 
 
 (defn -main [& args]
