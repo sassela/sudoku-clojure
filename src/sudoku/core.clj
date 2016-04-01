@@ -1,5 +1,7 @@
 (ns sudoku.core
-  (require [clojure.pprint :refer [pprint]])
+  (require [clojure.pprint :refer [pprint]]
+    [clojure.set :refer [difference]]
+    [clojure.core.matrix :refer [pm]])
   (:gen-class))
 
 
@@ -47,7 +49,9 @@
         x-start (box-start x)
         y-start (box-start y)
         remove-singleton-box-row (fn [r] (loop [i x-start row r]
-                                           (if (>= i (+ x-start box-size)) row (recur (inc i) (update row i (fn [d] (remove-singleton d s))))))) ;TODO move
+                                           (if (>= i (+ x-start box-size))
+                                             row
+                                             (recur (inc i) (update row i (fn [d] (remove-singleton d s))))))) ;TODO move
         ]
     (loop [row y-start d data]
       (if (>= row (+ y-start box-size)) d (recur (inc row) (update d row remove-singleton-box-row))))))
@@ -94,6 +98,26 @@
               s (set-at data x y)]
           (if (singleton? s) (remove-singletons d s x y) d))
         (rest c)))))
+
+(defn unique-singleton
+  [s other-sets]
+  (when singleton? (difference s (set other-sets)) (difference s (set other-sets))))
+
+(defn reduce-unique-singletons
+  [data]
+  (let [row #(nth data %)
+        col #(map (fn [row] (nth row %)) data)
+        box (fn [x y] (flatten (map #(subvec % (quot x 3) (+ (quot x 3) 3)) (subvec data y (+ y 3)))))]
+    (loop [d data c (coordinates data)]
+      (if (or (nil? c) (empty? c))
+        d
+        (recur (let [xy (first c)
+                     x (first xy)
+                     y (second xy)
+                     s (set-at data x y)]
+                 (print (difference )))
+          (rest c))))
+    ))
 
 
 (defn solve
