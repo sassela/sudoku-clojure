@@ -101,35 +101,57 @@
 
 (defn unique-singleton
   [s other-sets]
-  (when singleton? (difference s (set other-sets)) (difference s (set other-sets))))
+  (let [unique-set (difference s (set other-sets))]
+    (when (singleton? unique-set) unique-set)))
+
+
+(defn adjacent-sets
+  "Get set of items in the same row, column and box as the set at the given coordinate"
+  [data x y]
+  (let [s (set-at data x y)
+        row (fn [y] (nth data y))
+        col (fn [x] (map #(nth % x) data))
+        box (fn [x y]
+              (flatten (map #(subvec % (quot x 3) (+ (quot x 3) 3)) (subvec data (quot y 3) (+ (quot y 3) 3)))))
+        ;; get vector of sets in same row, column and box as current set
+        adj-sets (apply concat [(row y) (col x) (box x y)])
+        ;; removes one instance of the original set from adj-sets.
+        ;; function credit: http://stackoverflow.com/questions/7662447/what-is-idiomatic-clojure-to-remove-a-single-instance-from-many-in-a-list
+        [same diff] (split-with (partial = s) adj-sets)
+        adj-sets-ex-original (into #{} (concat diff (rest same)))]
+    adj-sets-ex-original))
+
 
 (defn reduce-unique-singletons
   [data]
-  (let [row (fn [d y] (nth d y))
-        col (fn [d x] #(map (nth % x) d))
-        box (fn [d x y] (flatten (map #(subvec % (quot x 3) (+ (quot x 3) 3)) (subvec d y (+ y 3)))))]
-    (loop [d data c (coordinates data)]
-      (if (or (nil? c) (empty? c))
-        d
-        (recur (let [xy (first c)
-                     x (first xy)
-                     y (second xy)
-                     s (set-at data x y)]
-                 (print (difference )))
-          (rest c))))
-    ))
+  (loop [d data c (coordinates data)]
+    (if (or (nil? c) (empty? c))
+      d
+      (recur (let [[x y] (first c)
+                   s (set-at d x y)]
+               (if-let [singleton (unique-singleton s (adjacent-sets d x y))]
+                 (-> d
+                   (assoc-in [y x] singleton)
+                   (remove-singletons singleton x y))
+                 d)
+               )
+        (rest c)))))
 
 
 (defn solve
   [data]
   (let [transformed-data (transform data)]
-    (loop [d transformed-data]
-      (if (every-set-is-singleton? d)
-        d
+    (loop [sudoku-grid transformed-data]
+      (if (every-set-is-singleton? sudoku-grid)
+        sudoku-grid
         (recur (do
-                 (print d)
-                 (remove-all-singletons d)))))
-    ))
+                 (print
+                   (-> sudoku-grid
+                   reduce-unique-singletons
+                   remove-all-singletons))
+                 (-> sudoku-grid
+                   reduce-unique-singletons
+                   remove-all-singletons)))))))
 
 
 (defn -main [& args]
